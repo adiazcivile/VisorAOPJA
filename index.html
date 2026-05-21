@@ -105,6 +105,19 @@
         margin: 0 1rem;
       }
 
+      .toolbar__menu-toggle {
+        display: none;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        padding: 0;
+        flex: 0 0 auto;
+      }
+
+      .toolbar__menu-toggle .material-icons-round {
+        font-size: 1.35rem;
+      }
+
       .toolbar__meta {
         display: inline-flex;
         align-items: center;
@@ -210,12 +223,15 @@
         display: flex;
         align-items: stretch;
         justify-content: center;
+        width: 100%;
+        min-width: 0;
         min-height: 0;
       }
 
       .viewer-card {
         width: 100%;
         height: 100%;
+        min-width: 0;
         min-height: 0;
         border-radius: 1.75rem;
         background: #121524;
@@ -293,6 +309,12 @@
         border-radius: inherit;
         position: relative;
         display: block;
+      }
+
+      #app canvas {
+        display: block;
+        width: 100% !important;
+        height: 100% !important;
       }
 
       .tool-windows {
@@ -1972,7 +1994,8 @@
       }
 
       @media (max-width: 1100px) {
-        .visor-body {
+        .visor-body,
+        .visor-body.has-tool-windows {
           grid-template-columns: 1fr;
         }
 
@@ -2002,6 +2025,111 @@
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
+
+      @media (max-width: 760px) {
+        .toolbar {
+          gap: 0.45rem;
+          padding: 0.65rem 0.7rem;
+        }
+
+        .toolbar__identity {
+          flex: 1 1 auto;
+          min-width: 0;
+          gap: 0.5rem;
+        }
+
+        .toolbar__logo {
+          width: clamp(68px, 22vw, 104px);
+          height: 38px;
+          flex: 0 0 auto;
+        }
+
+        .toolbar__identity > div {
+          min-width: 0;
+        }
+
+        .toolbar__title,
+        .toolbar__status {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .toolbar__title {
+          font-size: 0.9rem;
+        }
+
+        .toolbar__menu-toggle {
+          display: inline-flex;
+        }
+
+        .toolbar__actions {
+          position: absolute;
+          top: calc(100% + 0.45rem);
+          right: 0.7rem;
+          display: none;
+          flex-direction: column;
+          align-items: stretch;
+          width: min(230px, calc(100vw - 1.4rem));
+          margin: 0;
+          padding: 0.45rem;
+          border: 1px solid rgba(15, 23, 42, 0.12);
+          border-radius: 0.8rem;
+          background: rgba(255, 255, 255, 0.98);
+          box-shadow: 0 16px 34px rgba(15, 23, 42, 0.2);
+          z-index: 30;
+        }
+
+        .toolbar.is-tool-menu-open .toolbar__actions {
+          display: flex;
+        }
+
+        .toolbar__actions .tool-button {
+          width: 100%;
+          justify-content: flex-start;
+          border-radius: 0.62rem;
+          padding: 0.72rem 0.75rem;
+        }
+
+        .toolbar__meta {
+          flex: 0 0 auto;
+        }
+
+        .about-link-btn {
+          width: 38px;
+          height: 38px;
+          justify-content: center;
+          padding: 0;
+          font-size: 0;
+        }
+
+        .about-link-btn .material-icons-round {
+          font-size: 1.25rem;
+        }
+
+        .toolbar__load {
+          width: 42px;
+          height: 42px;
+          justify-content: center;
+          padding: 0;
+          font-size: 0;
+          flex: 0 0 auto;
+        }
+
+        .toolbar__load .material-icons-round {
+          font-size: 1.25rem;
+        }
+
+        .visor-body {
+          gap: 0.7rem;
+          padding: 0.75rem;
+        }
+
+        .viewer-card,
+        .tool-card {
+          border-radius: 1rem;
+        }
+      }
     </style>
     <script type="module" crossorigin src="./bundle.js"></script>
   </head>
@@ -2015,7 +2143,10 @@
             <span id="toolbar-status-text" class="toolbar__status">Sin modelo cargado</span>
           </div>
         </div>
-        <div class="toolbar__actions">
+        <button type="button" class="tool-button toolbar__menu-toggle" id="toolbar-menu-toggle" aria-label="Abrir menu de herramientas" aria-expanded="false" aria-controls="toolbar-actions">
+          <span class="material-icons-round" aria-hidden="true">menu</span>
+        </button>
+        <div class="toolbar__actions" id="toolbar-actions">
           <button type="button" class="tool-button" id="filter-tool-button"><span class="material-icons-round" aria-hidden="true">filter_alt</span>Filtrar</button>
           <button type="button" class="tool-button" data-tool="tree"><span class="material-icons-round" aria-hidden="true">account_tree</span>Árbol</button>
           <button type="button" class="tool-button" data-tool="data"><span class="material-icons-round" aria-hidden="true">table_rows</span>Datos</button>
