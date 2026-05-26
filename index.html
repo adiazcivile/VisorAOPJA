@@ -118,6 +118,10 @@
         font-size: 1.35rem;
       }
 
+      .tool-button.toolbar__menu-toggle {
+        display: none;
+      }
+
       .toolbar__meta {
         display: inline-flex;
         align-items: center;
@@ -200,6 +204,23 @@
 
       .toolbar__load .material-icons-round {
         color: #3A913F;
+      }
+
+      .toolbar__example {
+        white-space: nowrap;
+        border-color: rgba(226, 138, 0, 0.55);
+        background: #fff7e8;
+        color: #5b3400;
+        box-shadow: 0 8px 20px rgba(226, 138, 0, 0.18);
+      }
+
+      .toolbar__example:hover {
+        border-color: rgba(196, 105, 0, 0.78);
+        background: #ffefcf;
+      }
+
+      .toolbar__example .material-icons-round {
+        color: #d97706;
       }
 
       .visor-body {
@@ -2059,7 +2080,7 @@
           font-size: 0.9rem;
         }
 
-        .toolbar__menu-toggle {
+        .tool-button.toolbar__menu-toggle {
           display: inline-flex;
         }
 
@@ -2120,6 +2141,19 @@
           font-size: 1.25rem;
         }
 
+        .toolbar__example {
+          width: 42px;
+          height: 42px;
+          justify-content: center;
+          padding: 0;
+          font-size: 0;
+          flex: 0 0 auto;
+        }
+
+        .toolbar__example .material-icons-round {
+          font-size: 1.25rem;
+        }
+
         .visor-body {
           gap: 0.7rem;
           padding: 0.75rem;
@@ -2143,6 +2177,7 @@
             <span id="toolbar-status-text" class="toolbar__status">Sin modelo cargado</span>
           </div>
         </div>
+        <button type="button" id="load-example-model" class="tool-button toolbar__example"><span class="material-icons-round" aria-hidden="true">view_in_ar</span>Cargar Ejemplo</button>
         <button type="button" class="tool-button toolbar__menu-toggle" id="toolbar-menu-toggle" aria-label="Abrir menu de herramientas" aria-expanded="false" aria-controls="toolbar-actions">
           <span class="material-icons-round" aria-hidden="true">menu</span>
         </button>
@@ -2157,7 +2192,7 @@
         <div class="toolbar__meta">
           <button type="button" class="about-link-btn" id="about-button"><span class="material-icons-round" aria-hidden="true">info</span>Acerca de</button>
         </div>
-        <button type="button" id="header-load-ifc" class="tool-button toolbar__load" hidden><span class="material-icons-round" aria-hidden="true">upload_file</span>Cargar IFC</button>
+        <button type="button" id="header-load-ifc" class="tool-button toolbar__load"><span class="material-icons-round" aria-hidden="true">upload_file</span>Cargar IFC</button>
       </header>
       <section class="visor-body">
         <section class="viewer-area">
